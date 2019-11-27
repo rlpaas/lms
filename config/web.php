@@ -71,6 +71,9 @@ $config = [
         ],
         
     ],
+    'aliases' => [
+        '@adminlte/widgets'=>'@vendor/adminlte/yii2-widgets'
+        ],
     'params' => $params,
 
     'modules' => [

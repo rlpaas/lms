@@ -4,93 +4,41 @@
 /* @var $content string */
 
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
-use app\assets_b\AppAsset;
+//use app\assets\AppAsset;
+use app\assets_b\AdminLteAsset;
 
-AppAsset::register($this);
+//AppAsset::register($this);
+$asset      = AdminLteAsset::register($this);
+$baseUrl    = $asset->baseUrl;
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body>
+<body class="hold-transition skin-yellow-light sidebar-mini">
 <?php $this->beginBody() ?>
 
-<div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => 'My Company',
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-        $menuItems[] = ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index']];
-    
-    if(Yii::$app->user->can('admin-permission')):
-
-        $menuItems[] = ['label' => Yii::t('app', 'Access-Control'), 'items'=> [
-        ['label' => 'Assignment', 'url' => ['/admin/']],
-        ['label' => 'Role', 'url' => ['/admin/role']],
-        ['label' => 'Permission', 'url' => ['/admin/permission']],
-        ['label' => 'Route', 'url' => ['/admin/route']],
-        ['label' => 'Rule', 'url' => ['/admin/rule']],
-
-        ]];
-
-        $menuItems[] = ['label' => Yii::t('app', 'Users'), 'items'=> [
-        ['label' => 'List', 'url' => ['/user/admin/']],
-        ['label' => 'Create', 'url' => ['/user/admin/create']],
-
-        ]];
-
-    endif;
-
-    if(Yii::$app->user->isGuest):
-        $menuItems[] = ['label' => 'Sign in', 'url' => ['/user/security/login']];
-
-    else:
-        $menuItems[] = ['label' => Yii::$app->user->identity->username, 'items'=> [
-        ['label' => 'Settings', 'url' => ['/user/settings/account']],
-        ['label' => 'Networks', 'url' => ['/user/settings/networks']],
-        ['label' => 'Sign out','url' => ['/user/security/logout'],'linkOptions' => ['data-method' => 'post']],
-
-        ]];
-
-
-    endif;
-
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => $menuItems,
-    ]);
-    NavBar::end();
-    ?>
-
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= $content ?>
-    </div>
+<div class="wrapper">
+    <?= $this->render('header.php', ['baserUrl' => $baseUrl, 'title'=>Yii::$app->name]) ?>
+    <?= $this->render('leftside.php', ['baserUrl' => $baseUrl]) ?>
+    <?= $this->render('content.php', ['content' => $content]) ?>
+    <?= $this->render('footer.php', ['baserUrl' => $baseUrl]) ?>
 </div>
 
-<footer class="footer">
+<!--footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">&copy; My Company <?//= date('Y') ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        <p class="pull-right"><?//= Yii::powered() ?></p>
     </div>
-</footer>
+</footer-->
 
 <?php $this->endBody() ?>
 </body>
