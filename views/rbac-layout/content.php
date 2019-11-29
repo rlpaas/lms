@@ -31,7 +31,7 @@ use yii\widgets\AlertLte;
 
         <!-- Main content -->
         <section class="content">
-			<div class="box box-danger">
+        	<div class="box box-danger">
 				<div class="box-body">
 					<?= $content ?>
 				</div>

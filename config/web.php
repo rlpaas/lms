@@ -4,9 +4,11 @@ $params = require(__DIR__ . '/params.php');
 $db = require(__DIR__ . '/db.php');
 
 $config = [
-    'id' => 'practical-b',
+    'id' => 'CEU-CC',
+    'name' => 'CEU-CC',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'timeZone' => 'Asia/Manila',
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -98,7 +100,8 @@ $config = [
         ],
         'admin' => [
             'class' => 'mdm\admin\Module',
-            //'layout' => 'left-menu', 
+            'mainLayout' => '@app/views/layouts/main.php',
+            'layout' => 'top-menu', 
             
         ]
     ],
