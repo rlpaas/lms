@@ -10,6 +10,11 @@ $config = [
     'bootstrap' => ['log'],
     'timeZone' => 'Asia/Manila',
     'components' => [
+       
+        'assetManager' => [
+            'linkAssets' => true,
+        ],
+        
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'PEi6ICsok3vWiJSJJtQV2JZ6D-jk5gkh',
@@ -68,6 +73,7 @@ $config = [
             'theme' => [
                 'pathMap' => [
                     '@dektrium/user/views/security' => '@app/views/admin-user',
+                    '@dektrium/user/views/admin' => '@app/views/admin',
                 ],
             ],
         ],
@@ -88,6 +94,11 @@ $config = [
             'enableRegistration' => false,
             'adminPermission' => 'administrator',
             'admins' => ['admin'],
+
+            'modelMap' => [
+
+                'Profile' => 'app\models\Profile',
+             ],
 
             'controllerMap' => [
                 'security' => [

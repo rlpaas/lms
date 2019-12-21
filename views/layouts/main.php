@@ -11,6 +11,9 @@ use app\assets_b\AdminLteAsset;
 $asset      = AdminLteAsset::register($this);
 $baseUrl    = $asset->baseUrl;
 
+use app\assets_b\AppAsset;
+AppAsset::register($this);
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

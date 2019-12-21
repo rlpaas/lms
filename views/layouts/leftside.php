@@ -32,53 +32,73 @@ use yii\helpers\Url;
                             'active' => $this->context->route == 'site/index',
                         ],
 
+                         [
+                            'label' => 'Members Profile',
+                            'icon' => 'fa fa-users',
+                            'visible'=> Yii::$app->user->can('admin-permission'),
+                            'url' => ['/profile/index'],
+                            'active' => Yii::$app->controller->id == 'profile'
+                               
+                        ],
+
                         [
-                            'label' => 'Access-Control',
-                            'icon' => 'fa fa-lock',
+                            'label' => 'System Settings',
+                            'icon' => 'fa fa-gears',
                             'visible'=> Yii::$app->user->can('admin-permission'),
                             'url' => '#',
                             'items' => [
                                 [
-                                    'label' => 'Assignment',
-                                    'icon' => 'fa fa-pencil-square-o',
-                                    'url' => ['/admin'],
-                                    'active' => Yii::$app->controller->id == 'assignment'
+                                    'label'=> 'Access-Control',
+                                    'icon' => 'fa fa-lock',
+                                    'url'=>'#',
+                                    'items'=> [
+                                        [
+                                        'label' => 'Assignment',
+                                        'icon' => 'fa fa-pencil-square-o',
+                                        'url' => ['/admin'],
+                                        'active' => Yii::$app->controller->id == 'assignment'
+                                        ],
+                                        [
+                                            'label' => 'Role',
+                                            'icon' => 'fa  fa-user-plus',
+                                            'url' => ['/admin/role'],
+                                            'active' => Yii::$app->controller->id == 'role'
+                                        ],
+                                        [
+                                            'label' => 'Permission',
+                                            'icon' => 'fa fa-gear',
+                                            'url' => ['/admin/permission'],
+                                            'active' => Yii::$app->controller->id == 'permission'
+                                        ],
+                                        [
+                                            'label' => 'Route',
+                                            'icon' => 'fa fa-map',
+                                            'url' => ['/admin/route'],
+                                            'active' => Yii::$app->controller->id == 'route'
+                                        ],
+                                        [
+                                            'label' => 'Rule',
+                                            'icon' => 'fa fa-street-view',
+                                            'url' => ['/admin/rule'],
+                                            'active' => Yii::$app->controller->id == 'rule'
+                                        ],
+
+                                    ],
+
+
                                 ],
-                                [
-                                    'label' => 'Role',
-                                    'icon' => 'fa  fa-user-plus',
-                                    'url' => ['/admin/role'],
-                                    'active' => Yii::$app->controller->id == 'role'
-                                ],
-                                [
-                                    'label' => 'Permission',
-                                    'icon' => 'fa fa-gears',
-                                    'url' => ['/admin/permission'],
-                                    'active' => Yii::$app->controller->id == 'permission'
-                                ],
-                                [
-                                    'label' => 'Route',
-                                    'icon' => 'fa fa-map',
-                                    'url' => ['/admin/route'],
-                                    'active' => Yii::$app->controller->id == 'route'
-                                ],
-                                [
-                                    'label' => 'Rule',
-                                    'icon' => 'fa fa-street-view',
-                                    'url' => ['/admin/rule'],
-                                    'active' => Yii::$app->controller->id == 'rule'
-                                ],
+
+                                    [
+                                        'label' => 'Users',
+                                        'icon' => 'fa fa-users',
+                                        'url' => ['/user/admin'],
+                                        'active' => Yii::$app->controller->id == 'admin'
+                               
+                                    ],
 
                             ]
                         ],
-                        [
-                            'label' => 'Users',
-                            'icon' => 'fa fa-users',
-                            'visible'=> Yii::$app->user->can('admin-permission'),
-                            'url' => ['/user/admin'],
-                            'active' => Yii::$app->controller->id == 'admin'
-                   
-                        ],
+                        
 
                         //['label' => 'Gii', 'icon' => 'fa fa-file-code-o', 'url' => ['/gii'],],
                         //['label' => 'Debug', 'icon' => 'fa fa-dashboard', 'url' => ['/debug'],],

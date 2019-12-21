@@ -15,7 +15,7 @@ class AdminLteAsset extends AssetBundle
         'plugins/jvectormap/jquery-jvectormap-1.2.2.css',
         'css/AdminLTE.min.css',
         'css/skins/_all-skins.min.css',
-        'css/style.css',
+        //'css/style.css',
     ];
     public $js = [
         'plugins/fastclick/fastclick.min.js',
