@@ -43,11 +43,11 @@ use app\models\Campus;
     <?= $form->field($profile, 'mi') ?>
     <?= $form->field($profile, 'birth_date') ?>
     <?= $form->field($profile, 'address')->textarea() ?>
-    <?= $form->field($profile, 'campus_id')->dropDownList(ArrayHelper::map(Campus::find()->all(), 'id', 'campus_name'),[
+    <?= $form->field($profile, 'campus_id')->dropDownList(ArrayHelper::map(Campus::find()->where(['is_active'=>Campus::IS_ACTIVE_YES])->all(), 'id', 'campus_name'),[
         'prompt'=>'Select Campus', 'class'=>'form-control']) ?>
-    <?= $form->field($profile, 'school_college_id')->dropDownList(ArrayHelper::map(SchoolCollege::find()->all(), 'id', 'school_college_name'),[
+    <?= $form->field($profile, 'school_college_id')->dropDownList(ArrayHelper::map(SchoolCollege::find()->where(['is_active'=>SchoolCollege::IS_ACTIVE_YES])->all(), 'id', 'school_college_name'),[
         'prompt'=>'Select School/College', 'class'=>'form-control']) ?>
-    <<?= $form->field($profile, 'department_division_id')->dropDownList(ArrayHelper::map(DepartmentDivision::find()->all(), 'id', 'department_division_name'),[
+    <?= $form->field($profile, 'department_division_id')->dropDownList(ArrayHelper::map(DepartmentDivision::find()->where(['is_active'=>DepartmentDivision::IS_ACTIVE_YES])->all(), 'id', 'department_division_name'),[
         'prompt'=>'Select Department/Division', 'class'=>'form-control']) ?>
     <?= $form->field($profile, 'contact_number') ?>
     <?= $form->field($profile, 'classification_id') ?>

@@ -36,5 +36,6 @@ use yii\widgets\AlertLte;
 					<?= $content ?>
 				</div>
 			</div>
+			
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->

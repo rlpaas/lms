@@ -36,6 +36,7 @@ class DepartmentDivisionController extends Controller
     public function actionIndex()
     {
         $searchModel = new DepartmentDivisionSearch();
+        $searchModel->is_active = DepartmentDivision::IS_ACTIVE_YES;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -66,11 +67,17 @@ class DepartmentDivisionController extends Controller
     {
         $model = new DepartmentDivision();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            if($model->save())
+            {
+                return 1;
+            }else{
+
+                return 0;
+            }
         }
 
-        return $this->render('create', [
+        return $this->renderAjax('create', [
             'model' => $model,
         ]);
     }
@@ -87,10 +94,10 @@ class DepartmentDivisionController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
-        return $this->render('update', [
+        return $this->renderAjax('update', [
             'model' => $model,
         ]);
     }

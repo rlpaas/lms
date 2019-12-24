@@ -86,6 +86,8 @@ $config = [
 
     'modules' => [
 
+        'gridview' => ['class' => 'kartik\grid\Module'],
+
         'user' => [
             'class' => 'dektrium\user\Module',
             'enableFlashMessages' => true,

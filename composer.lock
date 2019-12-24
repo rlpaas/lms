@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1409264f285f6d056de26882e02cbd5b",
+    "content-hash": "1919e34ee7fa166645f04f5636bc9321",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -4165,7 +4165,8 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "dektrium/yii2-user": 20,
-        "kartik-v/yii2-grid": 20
+        "kartik-v/yii2-grid": 20,
+        "kartik-v/yii2-dialog": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

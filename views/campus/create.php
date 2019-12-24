@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="campus-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h3> <i class="fa fa-building"><?= Html::encode($this->title) ?></i> </h3>
 
     <?= $this->render('_form', [
         'model' => $model,

@@ -36,6 +36,7 @@ class SchoolCollegeController extends Controller
     public function actionIndex()
     {
         $searchModel = new SchoolCollegeSearch();
+        $searchModel->is_active = SchoolCollege::IS_ACTIVE_YES;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -66,11 +67,18 @@ class SchoolCollegeController extends Controller
     {
         $model = new SchoolCollege();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+
+            if($model->save())
+            {
+                return 1;
+            }else{
+
+                return 0;
+            }
         }
 
-        return $this->render('create', [
+        return $this->renderAjax('create', [
             'model' => $model,
         ]);
     }
@@ -87,10 +95,10 @@ class SchoolCollegeController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
-        return $this->render('update', [
+        return $this->renderAjax('update', [
             'model' => $model,
         ]);
     }

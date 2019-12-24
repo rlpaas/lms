@@ -47,46 +47,45 @@ use yii\helpers\Url;
                             'visible'=> Yii::$app->user->can('admin-permission'),
                             'url' => '#',
                             'items' => [
-                                [
-                                    'label'=> 'Access-Control',
-                                    'icon' => 'fa fa-lock',
-                                    'url'=>'#',
-                                    'items'=> [
-                                        [
-                                        'label' => 'Assignment',
-                                        'icon' => 'fa fa-pencil-square-o',
-                                        'url' => ['/admin'],
-                                        'active' => Yii::$app->controller->id == 'assignment'
-                                        ],
-                                        [
-                                            'label' => 'Role',
-                                            'icon' => 'fa  fa-user-plus',
-                                            'url' => ['/admin/role'],
-                                            'active' => Yii::$app->controller->id == 'role'
-                                        ],
-                                        [
-                                            'label' => 'Permission',
-                                            'icon' => 'fa fa-gear',
-                                            'url' => ['/admin/permission'],
-                                            'active' => Yii::$app->controller->id == 'permission'
-                                        ],
-                                        [
-                                            'label' => 'Route',
-                                            'icon' => 'fa fa-map',
-                                            'url' => ['/admin/route'],
-                                            'active' => Yii::$app->controller->id == 'route'
-                                        ],
-                                        [
-                                            'label' => 'Rule',
-                                            'icon' => 'fa fa-street-view',
-                                            'url' => ['/admin/rule'],
-                                            'active' => Yii::$app->controller->id == 'rule'
+                                    [
+                                        'label'=> 'Access-Control',
+                                        'icon' => 'fa fa-lock',
+                                        'url'=>'#',
+                                        'items'=> [
+                                            [
+                                                'label' => 'Assignment',
+                                                'icon' => 'fa fa-pencil-square-o',
+                                                'url' => ['/admin'],
+                                                'active' => Yii::$app->controller->id == 'assignment'
+                                            ],
+                                            [
+                                                'label' => 'Role',
+                                                'icon' => 'fa  fa-user-plus',
+                                                'url' => ['/admin/role'],
+                                                'active' => Yii::$app->controller->id == 'role'
+                                            ],
+                                            [
+                                                'label' => 'Permission',
+                                                'icon' => 'fa fa-gear',
+                                                'url' => ['/admin/permission'],
+                                                'active' => Yii::$app->controller->id == 'permission'
+                                            ],
+                                            [
+                                                'label' => 'Route',
+                                                'icon' => 'fa fa-map',
+                                                'url' => ['/admin/route'],
+                                                'active' => Yii::$app->controller->id == 'route'
+                                            ],
+                                            [
+                                                'label' => 'Rule',
+                                                'icon' => 'fa fa-street-view',
+                                                'url' => ['/admin/rule'],
+                                                'active' => Yii::$app->controller->id == 'rule'
+                                            ],
+
                                         ],
 
                                     ],
-
-
-                                ],
 
                                     [
                                         'label' => 'Users',
@@ -94,6 +93,37 @@ use yii\helpers\Url;
                                         'url' => ['/user/admin'],
                                         'active' => Yii::$app->controller->id == 'admin'
                                
+                                    ],
+
+                                    [
+                                        'label'=> 'DropDown-List',
+                                        'icon' => 'fa fa-level-down',
+                                        'url'=>'#',
+                                        'items'=> [
+                                            [
+                                                'label' => 'Campus',
+                                                'icon' => 'fa fa-pencil-square-o',
+                                                'url' => ['/campus/index'],
+                                                'active' => Yii::$app->controller->id == 'campus'
+                                            ],
+
+                                            [
+                                                'label' => 'School/College',
+                                                'icon' => 'fa fa-pencil-square-o',
+                                                'url' => ['/school-college/index'],
+                                                'active' => Yii::$app->controller->id == 'school-college'
+                                            ],
+
+                                            [
+                                                'label' => 'Department/Division',
+                                                'icon' => 'fa fa-pencil-square-o',
+                                                'url' => ['/department-division/index'],
+                                                'active' => Yii::$app->controller->id == 'department-division'
+                                            ],
+                                            
+
+                                        ],
+
                                     ],
 
                             ]
