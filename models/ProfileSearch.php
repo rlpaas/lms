@@ -14,11 +14,16 @@ class ProfileSearch extends Profile
     /**
      * {@inheritdoc}
      */
+    public $campus;
+    public $schoolCollege;
+    public $department;
+
+    
     public function rules()
     {
         return [
-            [['user_id', 'empno', 'campus_id', 'school_college_id', 'department_division_id', 'contact_number', 'classification_id', 'job_type_id', 'created_at', 'updated_at'], 'integer'],
-            [['last_name', 'first_name', 'mi', 'birth_date', 'address', 'gravatar_id'], 'safe'],
+            [['user_id', 'empno', 'contact_number', 'classification_id', 'job_type_id', 'created_at', 'updated_at'], 'integer'],
+            [['last_name', 'first_name', 'mi', 'birth_date', 'address', 'gravatar_id','campus','schoolCollege','department'], 'safe'],
         ];
     }
 
@@ -40,7 +45,7 @@ class ProfileSearch extends Profile
      */
     public function search($params)
     {
-        $query = Profile::find();
+        $query = Profile::find()->joinWith(['campus','schoolCollege','departmentDivision']);
 
         // add conditions that should always apply here
 
@@ -61,9 +66,6 @@ class ProfileSearch extends Profile
             'user_id' => $this->user_id,
             'empno' => $this->empno,
             'birth_date' => $this->birth_date,
-            'campus_id' => $this->campus_id,
-            'school_college_id' => $this->school_college_id,
-            'department_division_id' => $this->department_division_id,
             'contact_number' => $this->contact_number,
             'classification_id' => $this->classification_id,
             'job_type_id' => $this->job_type_id,
@@ -71,11 +73,34 @@ class ProfileSearch extends Profile
             'updated_at' => $this->updated_at,
         ]);
 
+        $dataProvider->sort->attributes['campus'] = [
+            'asc' => ['campus.campus_name' => SORT_ASC],
+            'desc' => ['campus.campus_name' => SORT_DESC],
+        ];
+
+        $dataProvider->sort->attributes['schoolCollege'] = [
+            'asc' => ['school_college.school_college_name' => SORT_ASC],
+            'desc' => ['school_college.school_college_name' => SORT_DESC],
+        ];
+
+        $dataProvider->sort->attributes['department'] = [
+            'asc' => ['department_division.department_division_name' => SORT_ASC],
+            'desc' => ['department_division.department_division_name' => SORT_DESC],
+        ];
+
+
         $query->andFilterWhere(['like', 'last_name', $this->last_name])
             ->andFilterWhere(['like', 'first_name', $this->first_name])
             ->andFilterWhere(['like', 'mi', $this->mi])
             ->andFilterWhere(['like', 'address', $this->address])
             ->andFilterWhere(['like', 'gravatar_id', $this->gravatar_id]);
+
+        $query->andFilterWhere([
+            'campus.id' => $this->campus,
+            'school_college.id' => $this->schoolCollege,
+            'department_division.id' => $this->department,
+
+        ]);
 
         return $dataProvider;
     }

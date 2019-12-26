@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Profile */
 
-$this->title = $model->user_id;
+$this->title = $model->last_name. ", ".$model->first_name;
 $this->params['breadcrumbs'][] = ['label' => 'Profiles', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -15,36 +15,62 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->user_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->user_id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
-
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'user_id',
+            //'user_id',
             'empno',
             'last_name',
             'first_name',
             'mi',
             'birth_date',
             'address:ntext',
-            'campus_id',
-            'school_college_id',
-            'department_division_id',
+            [
+                'attribute' => 'campus_id',
+                'value' => function ($model) { 
+                    return !empty ($model->campus->campus_name) ? $model->campus->campus_name : '-';
+                },
+            ],
+            [
+                'attribute' => 'school_college_id',
+                'value' => function ($model) { 
+                    return !empty ($model->schoolCollege->school_college_name) ? $model->schoolCollege->school_college_name : '-';
+                },
+            ],
+            [
+                'attribute' => 'department_division_id',
+                'value' => function ($model) { 
+                    return  !empty ($model->departmentDivision->department_division_name) ? $model->departmentDivision->department_division_name : '-';
+                },
+            ],
             'contact_number',
-            'classification_id',
-            'job_type_id',
-            'gravatar_id',
-            'created_at',
-            'updated_at',
+            [
+                'attribute' => 'classification_id',
+                'value' => function ($model) { 
+                    return $model->getClassificationName();
+                },
+            ],
+            [
+                'attribute' => 'job_type_id',
+                'value' => function ($model) { 
+                    return $model->getTypeName();
+                },
+            ],
+            //'gravatar_id',
+            [
+                'attribute' => 'created_at',
+                'value' => function ($model) { 
+                    return Yii::$app->formatter->asDatetime($model->created_at);
+                },
+                'visible'=> Yii::$app->user->can('admin-permission'),
+            ],
+            [
+                'attribute' => 'updated_at',
+                'value' => function ($model) { 
+                    return Yii::$app->formatter->asDatetime($model->updated_at);
+                },
+                'visible'=> Yii::$app->user->can('admin-permission'),
+            ],
         ],
     ]) ?>
 

@@ -2,6 +2,13 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\widgets\Pjax;
+
+use yii\helpers\ArrayHelper;
+use app\models\Campus;
+use app\models\SchoolCollege;
+use app\models\DepartmentDivision;
+
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ProfileSearch */
@@ -18,6 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
+<?php Pjax::begin(['id' => 'profileTbl','enablePushState' => false]) ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -32,12 +40,39 @@ $this->params['breadcrumbs'][] = $this->title;
             //'mi',
             //'birth_date',
             //'address:ntext',
-            'campus_id',
-            'school_college_id',
-            'department_division_id',
+            [
+                'attribute'=> 'campus',
+                'filter' =>ArrayHelper::map(Campus::find()->asArray()->all(), 'id', 'campus_name'),
+                'value' => function ($data) {
+                    return !empty ($data->campus->campus_name) ? $data->campus->campus_name : '-';
+                },
+            ],
+            [
+                'attribute'=> 'schoolCollege',
+                'filter' =>ArrayHelper::map(SchoolCollege::find()->asArray()->all(), 'id', 'school_college_name'),
+                'value' => function ($data) {
+                    return !empty ($data->schoolCollege->school_college_name) ? $data->schoolCollege->school_college_name : '-';
+                },
+            ],
+
+            [
+                'attribute'=> 'department',
+                'filter' =>ArrayHelper::map(DepartmentDivision::find()->asArray()->all(), 'id', 'department_division_name'),
+                'value' => function ($data) {
+                    return  !empty ($data->departmentDivision->department_division_name) ? $data->departmentDivision->department_division_name : '-';
+                },
+            ],
             //'contact_number',
             //'classification_id',
-            'job_type_id',
+  
+            [
+                'attribute'=>'job_type_id',
+                'filter'=>$searchModel->getTypeList(),
+                'value'=>function ($data){
+                    return $data->getTypeName();
+                }
+            
+            ],
             //'gravatar_id',
             //'created_at',
             //'updated_at',
@@ -47,6 +82,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]); ?>
+<?php Pjax::end() ?>
 
 
 </div>

@@ -33,6 +33,15 @@ class Profile extends BaseProfile
     /**
      * {@inheritdoc}
      */
+
+    const JOB_TYPE_FACULTY = 1;
+    const JOB_TYPE_NON_TEACHING = 2;
+    const JOB_TYPE_MIDDLE_MANAGER = 3;
+
+    const CLASSIFICATION_REGULAR = 1;
+    const CLASSIFICATION_PAYEE = 2;
+
+
     public static function tableName()
     {
         return 'profile';
@@ -51,7 +60,7 @@ class Profile extends BaseProfile
             [['gravatar_id'], 'string','max' => 32],
             [['empno'], 'string','max' => 155],
             [['last_name', 'first_name', 'mi'], 'string', 'max' => 255],
-            [['user_id'], 'unique'],
+            [['user_id','empno'], 'unique'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
@@ -87,6 +96,69 @@ class Profile extends BaseProfile
         ];
     }
 
+
+    public function getTypeName($type = null)
+    {
+        $type = (empty($type_id)) ? $this->job_type_id : $type_id;
+
+        if($type === self::JOB_TYPE_FACULTY)
+        {
+            return 'Faculty';
+
+        }elseif($type === self::JOB_TYPE_NON_TEACHING){
+
+            return 'Non-Teaching';
+        }elseif($type === self::JOB_TYPE_MIDDLE_MANAGER){
+
+            return 'Middle Manager';
+        }else{
+
+            return '-';
+        }
+    }
+
+    public function getTypeList()
+    {
+        $typeArray = [
+            self::JOB_TYPE_FACULTY => 'Faculty',
+            self::JOB_TYPE_NON_TEACHING => 'Non-Teaching',
+            self::JOB_TYPE_MIDDLE_MANAGER => 'Middle Manager',
+        ];
+
+        return $typeArray;
+
+    }
+
+    public function getClassificationName($type = null)
+    {
+        $class = (empty($classification_id)) ? $this->classification_id : $tclassification_id;
+
+        if($class === self::CLASSIFICATION_REGULAR)
+        {
+            return 'Regular Member';
+
+        }elseif($class === self::CLASSIFICATION_PAYEE){
+
+            return 'Payee';
+
+        }else{
+
+            return '-';
+        }
+    }
+
+    public function getClassificationList()
+    {
+        $typeArray = [
+            self::CLASSIFICATION_REGULAR => 'Regular Member',
+            self::CLASSIFICATION_PAYEE => 'Payee',
+
+        ];
+
+        return $typeArray;
+
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -98,5 +170,20 @@ class Profile extends BaseProfile
     public function getAvatarUrl($size = 200)
     {
         return '//gravatar.com/avatar/' . $this->gravatar_id . '?s=' . $size;
+    }
+
+    public function getCampus()
+    {
+        return $this->hasOne(Campus::className(), ['id'=>'campus_id']);
+    }
+
+    public function getSchoolCollege()
+    {
+        return $this->hasOne(SchoolCollege::className(), ['id'=>'school_college_id']);
+    }
+
+    public function getDepartmentDivision()
+    {
+        return $this->hasOne(DepartmentDivision::className(), ['id'=>'department_division_id']);
     }
 }
