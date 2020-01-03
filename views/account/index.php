@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use yii\widgets\Pjax;
 
 use yii\helpers\ArrayHelper;
 use app\models\Campus;
@@ -11,22 +10,19 @@ use app\models\DepartmentDivision;
 
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\ProfileSearch */
+/* @var $searchModel app\models\search\AccountSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Profiles';
+$this->title = 'Accounts';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="profile-index">
+<div class="account-index">
 
-    <p>
-        <?= Html::a('Create', ['user/admin/create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <h1><?= Html::encode($this->title) ?></h1>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-<?php Pjax::begin(['id' => 'profileTbl','enablePushState' => false]) ?>
-    <?= GridView::widget([
+     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
@@ -84,7 +80,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]); ?>
-<?php Pjax::end() ?>
 
 
 </div>

@@ -8,6 +8,7 @@ use Yii;
 
 use dektrium\user\models\Profile as BaseProfile;
 use dektrium\user\models\User;
+use app\rbac\Role;
 
 /**
  * This is the model class for table "profile".
@@ -54,12 +55,12 @@ class Profile extends BaseProfile
     {
         return [
            
-            [['user_id', 'campus_id', 'school_college_id', 'department_division_id', 'contact_number', 'classification_id', 'job_type_id'], 'integer'],
+            [['user_id', 'campus_id', 'school_college_id', 'department_division_id', 'classification_id', 'job_type_id'], 'integer'],
             [['birth_date'], 'safe'],
             [['address'], 'string'],
             [['gravatar_id'], 'string','max' => 32],
             [['empno'], 'string','max' => 155],
-            [['last_name', 'first_name', 'mi'], 'string', 'max' => 255],
+            [['last_name', 'first_name', 'mi','contact_number'], 'string', 'max' => 255],
             [['user_id','empno'], 'unique'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
@@ -186,4 +187,10 @@ class Profile extends BaseProfile
     {
         return $this->hasOne(DepartmentDivision::className(), ['id'=>'department_division_id']);
     }
+
+    public function getRole()
+    {
+        // User has_one Role via Role.user_id -> id
+        return $this->hasOne(Role::className(), ['user_id' => 'user_id']);
+    }  
 }

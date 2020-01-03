@@ -1,15 +1,15 @@
 <?php
 
-namespace app\models;
+namespace app\models\search;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\DepartmentDivision;
+use app\models\Account;
 
 /**
- * DepartmentDivisionSearch represents the model behind the search form of `app\models\DepartmentDivision`.
+ * AccountSearch represents the model behind the search form of `app\models\Account`.
  */
-class DepartmentDivisionSearch extends DepartmentDivision
+class AccountSearch extends Account
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,7 @@ class DepartmentDivisionSearch extends DepartmentDivision
     public function rules()
     {
         return [
-            [['id', 'is_active'], 'integer'],
-            [['department_division_name'], 'safe'],
+            [['id', 'user_id', 'entity_type_id', 'account_type_id', 'status'], 'integer'],
         ];
     }
 
@@ -40,7 +39,7 @@ class DepartmentDivisionSearch extends DepartmentDivision
      */
     public function search($params)
     {
-        $query = DepartmentDivision::find();
+        $query = Account::find();
 
         // add conditions that should always apply here
 
@@ -59,10 +58,11 @@ class DepartmentDivisionSearch extends DepartmentDivision
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'is_active' => $this->is_active,
+            'user_id' => $this->user_id,
+            'entity_type_id' => $this->entity_type_id,
+            'account_type_id' => $this->account_type_id,
+            'status' => $this->status,
         ]);
-
-        $query->andFilterWhere(['like', 'department_division_name', $this->department_division_name]);
 
         return $dataProvider;
     }

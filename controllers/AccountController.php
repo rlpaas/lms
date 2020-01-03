@@ -3,16 +3,18 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\DepartmentDivision;
-use app\models\search\DepartmentDivisionSearch;
+use app\models\Account;
+use app\models\search\AccountSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
+use app\models\search\ProfileSearch;
+
 /**
- * DepartmentDivisionController implements the CRUD actions for DepartmentDivision model.
+ * AccountController implements the CRUD actions for Account model.
  */
-class DepartmentDivisionController extends Controller
+class AccountController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,14 +32,16 @@ class DepartmentDivisionController extends Controller
     }
 
     /**
-     * Lists all DepartmentDivision models.
+     * Lists all Account models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new DepartmentDivisionSearch();
-        $searchModel->is_active = DepartmentDivision::IS_ACTIVE_YES;
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        $theCreator = (\Yii::$app->user->can('theCreator')) ? true : false;
+
+        $searchModel = new ProfileSearch();
+        $dataProvider = $searchModel->searchAccount(Yii::$app->request->queryParams,$theCreator);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -46,7 +50,7 @@ class DepartmentDivisionController extends Controller
     }
 
     /**
-     * Displays a single DepartmentDivision model.
+     * Displays a single Account model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -59,31 +63,25 @@ class DepartmentDivisionController extends Controller
     }
 
     /**
-     * Creates a new DepartmentDivision model.
+     * Creates a new Account model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new DepartmentDivision();
+        $model = new Account();
 
-        if ($model->load(Yii::$app->request->post())) {
-            if($model->save())
-            {
-                return 1;
-            }else{
-
-                return 0;
-            }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->renderAjax('create', [
+        return $this->render('create', [
             'model' => $model,
         ]);
     }
 
     /**
-     * Updates an existing DepartmentDivision model.
+     * Updates an existing Account model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -94,16 +92,16 @@ class DepartmentDivisionController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->renderAjax('update', [
+        return $this->render('update', [
             'model' => $model,
         ]);
     }
 
     /**
-     * Deletes an existing DepartmentDivision model.
+     * Deletes an existing Account model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -117,15 +115,15 @@ class DepartmentDivisionController extends Controller
     }
 
     /**
-     * Finds the DepartmentDivision model based on its primary key value.
+     * Finds the Account model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return DepartmentDivision the loaded model
+     * @return Account the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = DepartmentDivision::findOne($id)) !== null) {
+        if (($model = Account::findOne($id)) !== null) {
             return $model;
         }
 

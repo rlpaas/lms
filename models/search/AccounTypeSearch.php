@@ -1,15 +1,15 @@
 <?php
 
-namespace app\models;
+namespace app\models\search;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\SchoolCollege;
+use app\models\AccountType;
 
 /**
- * SchoolCollegeSearch represents the model behind the search form of `app\models\SchoolCollege`.
+ * AccounTypeSearch represents the model behind the search form of `app\models\AccountType`.
  */
-class SchoolCollegeSearch extends SchoolCollege
+class AccounTypeSearch extends AccountType
 {
     /**
      * {@inheritdoc}
@@ -18,7 +18,7 @@ class SchoolCollegeSearch extends SchoolCollege
     {
         return [
             [['id', 'is_active'], 'integer'],
-            [['school_college_name'], 'safe'],
+            [['account_name'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class SchoolCollegeSearch extends SchoolCollege
      */
     public function search($params)
     {
-        $query = SchoolCollege::find();
+        $query = AccountType::find();
 
         // add conditions that should always apply here
 
@@ -62,7 +62,7 @@ class SchoolCollegeSearch extends SchoolCollege
             'is_active' => $this->is_active,
         ]);
 
-        $query->andFilterWhere(['like', 'school_college_name', $this->school_college_name]);
+        $query->andFilterWhere(['like', 'account_name', $this->account_name]);
 
         return $dataProvider;
     }

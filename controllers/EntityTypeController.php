@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\DepartmentDivision;
-use app\models\search\DepartmentDivisionSearch;
+use app\models\EntityType;
+use app\models\search\EntityTypeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * DepartmentDivisionController implements the CRUD actions for DepartmentDivision model.
+ * EntityTypeController implements the CRUD actions for EntityType model.
  */
-class DepartmentDivisionController extends Controller
+class EntityTypeController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,13 +30,12 @@ class DepartmentDivisionController extends Controller
     }
 
     /**
-     * Lists all DepartmentDivision models.
+     * Lists all EntityType models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new DepartmentDivisionSearch();
-        $searchModel->is_active = DepartmentDivision::IS_ACTIVE_YES;
+        $searchModel = new EntityTypeSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -46,7 +45,7 @@ class DepartmentDivisionController extends Controller
     }
 
     /**
-     * Displays a single DepartmentDivision model.
+     * Displays a single EntityType model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -59,31 +58,25 @@ class DepartmentDivisionController extends Controller
     }
 
     /**
-     * Creates a new DepartmentDivision model.
+     * Creates a new EntityType model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new DepartmentDivision();
+        $model = new EntityType();
 
-        if ($model->load(Yii::$app->request->post())) {
-            if($model->save())
-            {
-                return 1;
-            }else{
-
-                return 0;
-            }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->renderAjax('create', [
+        return $this->render('create', [
             'model' => $model,
         ]);
     }
 
     /**
-     * Updates an existing DepartmentDivision model.
+     * Updates an existing EntityType model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -94,16 +87,16 @@ class DepartmentDivisionController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->renderAjax('update', [
+        return $this->render('update', [
             'model' => $model,
         ]);
     }
 
     /**
-     * Deletes an existing DepartmentDivision model.
+     * Deletes an existing EntityType model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -117,15 +110,15 @@ class DepartmentDivisionController extends Controller
     }
 
     /**
-     * Finds the DepartmentDivision model based on its primary key value.
+     * Finds the EntityType model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return DepartmentDivision the loaded model
+     * @return EntityType the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = DepartmentDivision::findOne($id)) !== null) {
+        if (($model = EntityType::findOne($id)) !== null) {
             return $model;
         }
 

@@ -103,9 +103,9 @@ $config = [
              ],
 
             'controllerMap' => [
+                'admin' => 'app\controllers\AdminController',
                 'security' => [
                     'class' => \dektrium\user\controllers\SecurityController::className(),
-                    
                     'layout' => '@app/views/layouts/login_layout',
                 ],
             ],

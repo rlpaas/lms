@@ -17,6 +17,8 @@ use app\models\DepartmentDivision;
 use app\models\SchoolCollege;
 use app\models\Campus;
 
+use app\rbac\AuthItem;
+
 /**
  * @var yii\web\View $this
  * @var dektrium\user\models\User $user
@@ -52,6 +54,15 @@ use app\models\Campus;
     <?= $form->field($profile, 'contact_number') ?>
     <<?= $form->field($profile, 'classification_id')->dropDownList($profile->getClassificationList()) ?>
     <?= $form->field($profile, 'job_type_id')->dropDownList($profile->getTypeList()) ?>
+
+    <?php foreach (AuthItem::getRoles() as $item_name): ?>
+        <?php 
+            $roles[$item_name->name] = $item_name->name 
+        ?>
+    <?php endforeach ?>
+
+    <?= $form->field($role, 'item_name')->dropDownList($roles) ?>
+
 
 <div class="form-group">
     <div class="col-lg-offset-3 col-lg-9">

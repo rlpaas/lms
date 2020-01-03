@@ -6,14 +6,14 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Profile */
 
-$this->title = $model->last_name. ", ".$model->first_name;
+$this->title = 'Profile';
 $this->params['breadcrumbs'][] = ['label' => 'Profiles', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="profile-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode($model->last_name. ", ".$model->first_name) ?></h1>
 
     <?= DetailView::widget([
         'model' => $model,

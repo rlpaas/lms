@@ -32,12 +32,21 @@ use yii\helpers\Url;
                             'active' => $this->context->route == 'site/index',
                         ],
 
-                         [
+                        [
                             'label' => 'Members Profile',
                             'icon' => 'fa fa-users',
                             'visible'=> Yii::$app->user->can('admin-permission'),
                             'url' => ['/profile/index'],
                             'active' => Yii::$app->controller->id == 'profile'
+                               
+                        ],
+
+                        [
+                            'label' => 'Account',
+                            'icon' => 'fa fa-bank',
+                            'visible'=> Yii::$app->user->can('admin-permission'),
+                            'url' => ['/account/index'],
+                            'active' => Yii::$app->controller->id == 'account'
                                
                         ],
 
