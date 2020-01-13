@@ -12,7 +12,7 @@ $config = [
     'components' => [
        
         'assetManager' => [
-            'linkAssets' => true,
+           //'linkAssets' => true,
         ],
         
         'request' => [
@@ -85,6 +85,11 @@ $config = [
     'params' => $params,
 
     'modules' => [
+        
+          'noty' => [
+
+            'class' => 'lo\modules\noty\Module',
+        ],
 
         'gridview' => ['class' => 'kartik\grid\Module'],
 

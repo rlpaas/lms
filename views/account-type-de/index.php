@@ -4,18 +4,18 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\search\AccountTypeSearch */
+/* @var $searchModel app\models\search\TransactionTypeDeSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Account Types';
+$this->title = 'Transaction Type Des';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="account-type-index">
+<div class="transaction-type-de-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Account Type', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Transaction Type De', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -27,9 +27,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'account_name',
-            'xact_type_code_de',
-            'is_active',
+            'xact_type_code',
+            'name',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

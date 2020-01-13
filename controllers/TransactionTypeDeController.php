@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\AccountType;
-use app\models\search\AccountTypeSearch;
+use app\models\TransactionTypeDe;
+use app\models\search\TransactionTypeDeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * AccountTypeController implements the CRUD actions for AccountType model.
+ * TransactionTypeDeController implements the CRUD actions for TransactionTypeDe model.
  */
-class AccountTypeController extends Controller
+class TransactionTypeDeController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +30,12 @@ class AccountTypeController extends Controller
     }
 
     /**
-     * Lists all AccountType models.
+     * Lists all TransactionTypeDe models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new AccountTypeSearch();
+        $searchModel = new TransactionTypeDeSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class AccountTypeController extends Controller
     }
 
     /**
-     * Displays a single AccountType model.
+     * Displays a single TransactionTypeDe model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,13 +58,13 @@ class AccountTypeController extends Controller
     }
 
     /**
-     * Creates a new AccountType model.
+     * Creates a new TransactionTypeDe model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new AccountType();
+        $model = new TransactionTypeDe();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -76,7 +76,7 @@ class AccountTypeController extends Controller
     }
 
     /**
-     * Updates an existing AccountType model.
+     * Updates an existing TransactionTypeDe model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -96,7 +96,7 @@ class AccountTypeController extends Controller
     }
 
     /**
-     * Deletes an existing AccountType model.
+     * Deletes an existing TransactionTypeDe model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,15 +110,15 @@ class AccountTypeController extends Controller
     }
 
     /**
-     * Finds the AccountType model based on its primary key value.
+     * Finds the TransactionTypeDe model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return AccountType the loaded model
+     * @return TransactionTypeDe the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = AccountType::findOne($id)) !== null) {
+        if (($model = TransactionTypeDe::findOne($id)) !== null) {
             return $model;
         }
 

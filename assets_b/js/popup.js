@@ -23,6 +23,14 @@ $(function(){
     });
 
 
+    //account create modal
+    $('#accountId').click(function(){
+        $('#accountPop').modal('show')
+        .find('#contentAccount')
+        .load($(this).attr('value'));
+    });
+
+
     $('.activity-view-link').click(function() {
     $.get(
         'view-ajax',

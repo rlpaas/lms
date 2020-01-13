@@ -29,7 +29,12 @@
         "mdmsoft/yii2-admin": "~2.0",
         "yiister/yii2-gentelella": "~1.0",
         "kartik-v/yii2-grid": "dev-master",
-        "kartik-v/yii2-dialog": "@dev"
+        "kartik-v/yii2-dialog": "@dev",
+        "loveorigami/yii2-notification-wrapper": "*",
+        "bower-asset/jquery-growl": "^1.3",
+        "bower-asset/noty": "^2.3",
+        "bower-asset/remarkable-bootstrap-notify": "^3.1",
+        "bower-asset/toastr": "^2.1"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

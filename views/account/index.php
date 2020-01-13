@@ -1,85 +1,80 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
-
+use kartik\grid\GridView;
 use yii\helpers\ArrayHelper;
-use app\models\Campus;
-use app\models\SchoolCollege;
-use app\models\DepartmentDivision;
+use yii\helpers\Url;
+use yii\widgets\Pjax;
+use yii\bootstrap\Modal;
 
+use app\models\EntityType;
+use app\models\AccountType;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\search\AccountSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Accounts';
+$this->title = 'Accounts'.'#:'.$id;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="account-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode($profile->empno.' '.$profile->last_name.' '.$profile->first_name) ?></h1>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+   <p>
+    <?= Html::button('Create', ['value'=>Url::to(['account/create', 'id'=>$id]),'class' => 'btn btn-success', 'id'=>'accountId']) ?>
 
-     <?= GridView::widget([
+    </p>
+
+<?php Pjax::begin(['id' => 'accountTbl','enablePushState' => false]) ?>
+
+    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'summary'=> '',
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            
+            //'id',
             //'user_id',
-            'empno',
-            'last_name',
-            'first_name',
-            //'mi',
-            //'birth_date',
-            //'address:ntext',
             [
-                'attribute'=> 'campus',
-                'filter' =>ArrayHelper::map(Campus::find()->asArray()->all(), 'id', 'campus_name'),
+                'attribute'=> 'entity_type_id',
+                'filter' =>ArrayHelper::map(EntityType::find()->asArray()->all(), 'id', 'entity_name'),
                 'value' => function ($data) {
-                    return !empty ($data->campus->campus_name) ? $data->campus->campus_name : '-';
-                },
-            ],
-            [
-                'attribute'=> 'schoolCollege',
-                'label'=> 'School/College',
-                'filter' =>ArrayHelper::map(SchoolCollege::find()->asArray()->all(), 'id', 'school_college_name'),
-                'value' => function ($data) {
-                    return !empty ($data->schoolCollege->school_college_name) ? $data->schoolCollege->school_college_name : '-';
+                    return $data->entityType->entity_name;
                 },
             ],
 
             [
-                'attribute'=> 'department',
-                'label'=> 'Department/Division',
-                'filter' =>ArrayHelper::map(DepartmentDivision::find()->asArray()->all(), 'id', 'department_division_name'),
+                'attribute'=> 'account_type_id',
+                'filter' =>ArrayHelper::map(AccountType::find()->asArray()->all(), 'id', 'account_name'),
                 'value' => function ($data) {
-                    return  !empty ($data->departmentDivision->department_division_name) ? $data->departmentDivision->department_division_name : '-';
+                    return $data->accountType->account_name;
                 },
             ],
-            //'contact_number',
-            //'classification_id',
-  
+
             [
-                'attribute'=>'job_type_id',
-                'filter'=>$searchModel->getTypeList(),
+                'attribute'=>'status',
+                'filter'=>$searchModel->getStatusList(),
                 'value'=>function ($data){
-                    return $data->getTypeName();
+                    return $data->getStatusName();
                 }
             
             ],
-            //'gravatar_id',
-            //'created_at',
-            //'updated_at',
 
-            ['class' => 'yii\grid\ActionColumn',
-                'template' => '{view}'
-            ],
+            ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+<?php Pjax::end() ?>
 
 
 </div>
+<?php
+Modal::begin([
+    'id'=>'accountPop',
+    'size'=>'modal-xs',
+   'clientOptions' => ['backdrop' => 'static', 'keyboard' => FALSE],
+  ]);
+ echo "<div id='contentAccount'></div>";
+Modal::end()
+?>

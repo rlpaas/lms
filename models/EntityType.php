@@ -18,6 +18,9 @@ class EntityType extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+    const IS_ACTIVE_YES = 1;
+    const IS_ACTIVE_NO = 2;
+    
     public static function tableName()
     {
         return 'entity_type';

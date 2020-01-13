@@ -45,7 +45,7 @@ use yii\helpers\Url;
                             'label' => 'Account',
                             'icon' => 'fa fa-bank',
                             'visible'=> Yii::$app->user->can('admin-permission'),
-                            'url' => ['/account/index'],
+                            'url' => ['/account/accounts'],
                             'active' => Yii::$app->controller->id == 'account'
                                
                         ],

@@ -3,19 +3,18 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Account */
+/* @var $model app\models\TransactionTypeDe */
 
-$this->title = 'Create Account';
-$this->params['breadcrumbs'][] = ['label' => 'Accounts', 'url' => ['index']];
+$this->title = 'Create Transaction Type De';
+$this->params['breadcrumbs'][] = ['label' => 'Transaction Type Des', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="account-create">
+<div class="transaction-type-de-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,
-        'id'=>$id
     ]) ?>
 
 </div>

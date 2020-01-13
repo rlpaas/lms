@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\search\AccountTypeSearch */
+/* @var $model app\models\search\TransactionTypeDeSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="account-type-search">
+<div class="transaction-type-de-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -17,11 +17,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'account_name') ?>
+    <?= $form->field($model, 'xact_type_code') ?>
 
-    <?= $form->field($model, 'xact_type_code_de') ?>
-
-    <?= $form->field($model, 'is_active') ?>
+    <?= $form->field($model, 'name') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

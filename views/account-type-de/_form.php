@@ -4,19 +4,17 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\AccountType */
+/* @var $model app\models\TransactionTypeDe */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="account-type-form">
+<div class="transaction-type-de-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'account_name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'xact_type_code')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'xact_type_code_de')->textInput() ?>
-
-    <?= $form->field($model, 'is_active')->textInput() ?>
+    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

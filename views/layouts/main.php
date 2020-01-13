@@ -6,6 +6,7 @@
 use yii\helpers\Html;
 //use app\assets\AppAsset;
 use app\assets_b\AdminLteAsset;
+use lo\modules\noty\Wrapper;
 
 //AppAsset::register($this);
 $asset      = AdminLteAsset::register($this);
@@ -27,6 +28,19 @@ AppAsset::register($this);
 </head>
 <body class="hold-transition skin-red sidebar-mini">
 <?php $this->beginBody() ?>
+
+ <?php echo Wrapper::widget([
+    'layerClass' => 'lo\modules\noty\layers\Toastr',
+    'layerOptions' => [
+            'customTitleDelimiter' => '|', // by default
+        ],
+    'options' => [
+        'progressBar' => true,
+        'timeOut'=> 3000,
+        'showMethod' => 'fadeIn',
+        'hideMethod' => 'fadeOut',
+    ]
+]); ?>
 
 <div class="wrapper">
     <?= $this->render('header.php', ['baserUrl' => $baseUrl, 'title'=>Yii::$app->name]) ?>

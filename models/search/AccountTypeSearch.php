@@ -4,12 +4,12 @@ namespace app\models\search;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Account;
+use app\models\AccountType;
 
 /**
- * AccountSearch represents the model behind the search form of `app\models\Account`.
+ * AccountTypeSearch represents the model behind the search form of `app\models\AccountType`.
  */
-class AccountSearch extends Account
+class AccountTypeSearch extends AccountType
 {
     /**
      * {@inheritdoc}
@@ -17,7 +17,8 @@ class AccountSearch extends Account
     public function rules()
     {
         return [
-            [['id', 'user_id', 'entity_type_id', 'account_type_id', 'status'], 'integer'],
+            [['id', 'xact_type_code_de', 'is_active'], 'integer'],
+            [['account_name'], 'safe'],
         ];
     }
 
@@ -37,9 +38,9 @@ class AccountSearch extends Account
      *
      * @return ActiveDataProvider
      */
-    public function search($params,$id)
+    public function search($params)
     {
-        $query = Account::find();
+        $query = AccountType::find();
 
         // add conditions that should always apply here
 
@@ -58,11 +59,11 @@ class AccountSearch extends Account
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'user_id' => $id,
-            'entity_type_id' => $this->entity_type_id,
-            'account_type_id' => $this->account_type_id,
-            'status' => $this->status,
+            'xact_type_code_de' => $this->xact_type_code_de,
+            'is_active' => $this->is_active,
         ]);
+
+        $query->andFilterWhere(['like', 'account_name', $this->account_name]);
 
         return $dataProvider;
     }
