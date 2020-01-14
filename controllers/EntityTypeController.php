@@ -36,6 +36,7 @@ class EntityTypeController extends Controller
     public function actionIndex()
     {
         $searchModel = new EntityTypeSearch();
+        $searchModel->is_active = EntityType::IS_ACTIVE_YES;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -66,11 +67,20 @@ class EntityTypeController extends Controller
     {
         $model = new EntityType();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            
+            if($model->save())
+            {
+                Yii::$app->session->setFlash('success', 'record saved!');
+                return 1;
+            }else{
+
+                Yii::$app->session->setFlash('error', 'record not saved!');
+                return 0;
+            }
         }
 
-        return $this->render('create', [
+        return $this->renderAjax('create', [
             'model' => $model,
         ]);
     }
@@ -87,10 +97,13 @@ class EntityTypeController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+
+            Yii::$app->session->setFlash('success', 'record updated!');
+
+            return $this->redirect(['index']);
         }
 
-        return $this->render('update', [
+        return $this->renderAjax('update', [
             'model' => $model,
         ]);
     }

@@ -71,6 +71,7 @@ class SchoolCollegeController extends Controller
 
             if($model->save())
             {
+                Yii::$app->session->setFlash('success', 'record saved!');
                 return 1;
             }else{
 
@@ -95,6 +96,7 @@ class SchoolCollegeController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', 'record updated!');
             return $this->redirect(['index']);
         }
 

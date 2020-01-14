@@ -42,7 +42,7 @@ class TransactionTypeDe extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'xact_type_code' => 'Xact Type Code',
+            'xact_type_code' => 'Transaction Type',
             'name' => 'Name',
         ];
     }

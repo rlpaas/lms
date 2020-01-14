@@ -30,6 +30,20 @@ $(function(){
         .load($(this).attr('value'));
     });
 
+    //entity-type create modal
+    $('#entityId').click(function(){
+        $('#entityPop').modal('show')
+        .find('#contentEntity')
+        .load($(this).attr('value'));
+    });
+
+    //account-type create modal
+    $('#accountId').click(function(){
+        $('#accountPop').modal('show')
+        .find('#accountEntity')
+        .load($(this).attr('value'));
+    });
+
 
     $('.activity-view-link').click(function() {
     $.get(

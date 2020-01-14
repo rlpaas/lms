@@ -58,6 +58,7 @@ class AccountController extends Controller
     {
         $profile = Profile::findOne($id);
         $searchModel = new AccountSearch();
+        $searchModel->status = Account::IS_STATUS_ACTIVE;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $id);
 
         
@@ -108,10 +109,11 @@ class AccountController extends Controller
 
             if($model->save())
             {
-                Yii::$app->session->setFlash('success', 'Account | is successfully saved!');
+                Yii::$app->session->setFlash('success', 'record saved!');
                 return 1;
             }else{
 
+                Yii::$app->session->setFlash('error', 'record not saved!');
                 return 0;
             }
         }else{

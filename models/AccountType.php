@@ -49,9 +49,33 @@ class AccountType extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'account_name' => 'Account Name',
-            'xact_type_code_de' => 'Xact Type Code De',
+            'xact_type_code_de' => 'Transaction Type',
             'is_active' => 'Is Active',
         ];
+    }
+
+    public function getIsActiveList()
+    {
+        $typeArray = [
+            self::IS_ACTIVE_YES => 'Yes',
+            self::IS_ACTIVE_NO => 'No',
+        ];
+
+        return $typeArray;
+
+    }
+
+    public function getIsActiveName($name = null)
+    {
+        $name = (empty($is_active)) ? $this->is_active : $is_active;
+
+        if($name === self::IS_ACTIVE_YES)
+        {
+            return 'Yes';
+        }else{
+
+            return 'No';
+        }
     }
 
     /**

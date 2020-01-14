@@ -50,6 +50,30 @@ class EntityType extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getIsActiveList()
+    {
+        $typeArray = [
+            self::IS_ACTIVE_YES => 'Yes',
+            self::IS_ACTIVE_NO => 'No',
+        ];
+
+        return $typeArray;
+
+    }
+
+    public function getIsActiveName($name = null)
+    {
+        $name = (empty($is_active)) ? $this->is_active : $is_active;
+
+        if($name === self::IS_ACTIVE_YES)
+        {
+            return 'Yes';
+        }else{
+
+            return 'No';
+        }
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */

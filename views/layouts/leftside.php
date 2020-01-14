@@ -111,23 +111,36 @@ use yii\helpers\Url;
                                         'items'=> [
                                             [
                                                 'label' => 'Campus',
-                                                'icon' => 'fa fa-pencil-square-o',
+                                                'icon' => 'fa fa-building',
                                                 'url' => ['/campus/index'],
                                                 'active' => Yii::$app->controller->id == 'campus'
                                             ],
 
                                             [
                                                 'label' => 'School/College',
-                                                'icon' => 'fa fa-pencil-square-o',
+                                                'icon' => 'fa fa-building-o',
                                                 'url' => ['/school-college/index'],
                                                 'active' => Yii::$app->controller->id == 'school-college'
                                             ],
 
                                             [
                                                 'label' => 'Department/Division',
-                                                'icon' => 'fa fa-pencil-square-o',
+                                                'icon' => 'fa fa-bank',
                                                 'url' => ['/department-division/index'],
                                                 'active' => Yii::$app->controller->id == 'department-division'
+                                            ],
+
+                                            [
+                                                'label' => 'Entity Type',
+                                                'icon' => 'fa fa-users',
+                                                'url' => ['/entity-type/index'],
+                                                'active' => Yii::$app->controller->id == 'entity-type'
+                                            ],
+                                            [
+                                                'label' => 'Account Type (EXT)',
+                                                'icon' => 'fa fa-money',
+                                                'url' => ['/account-type/index'],
+                                                'active' => Yii::$app->controller->id == 'account-type'
                                             ],
                                             
 

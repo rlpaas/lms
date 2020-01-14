@@ -65,7 +65,7 @@ $this->params['breadcrumbs'][] = $this->title;
              
 
                     },
-                    'delete' => function ($url,$model) {
+                    /*'delete' => function ($url,$model) {
 
                         return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, [
                             'title' => 'Delete',
@@ -82,9 +82,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             ",
                         ]);
 
-                   
-
-                    },
+                    },*/
                 ],
             ],
         ],
