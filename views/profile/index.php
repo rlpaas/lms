@@ -18,7 +18,7 @@ $this->title = 'Profiles';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="profile-index">
-
+    <h1><?= Html::encode($this->title) ?></h1>
     <p>
         <?= Html::a('Create', ['user/admin/create'], ['class' => 'btn btn-success']) ?>
     </p>
