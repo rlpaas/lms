@@ -14,17 +14,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="box-header" align="center">
         <h1><?= Html::encode($model->accountType->account_name) ?></h1>
+     </div>
         <p>
-            <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-            <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-                'class' => 'btn btn-danger',
-                'data' => [
-                    'confirm' => 'Are you sure you want to delete this item?',
-                    'method' => 'post',
-                ],
-            ]) ?>
+            <?= Html::a('Add Transaction', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+            
         </p>
-    </div>
+   
 
       <div class="row">
         <div class="col-md-3">
@@ -32,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
           <!-- Profile Image -->
           <div class="box box-primary">
             <div class="box-body box-profile">
-                <h1><?= Html::encode($model->user->empno.' '.$model->user->last_name.' '.$model->user->first_name) ?></h1>
+                <h4 align="center"><b><?= Html::encode($model->user->empno.' '.$model->user->last_name.' '.$model->user->first_name) ?></b></h4>
                 <?php if($model->account_type_id == 1): ?>
                     <div class="small-box bg-green">
                 <?php elseif($model->account_type_id == 2): ?>
