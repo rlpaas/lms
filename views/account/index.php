@@ -9,6 +9,7 @@ use yii\bootstrap\Modal;
 
 use app\models\EntityType;
 use app\models\AccountType;
+use app\models\AccountTransaction;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\search\AccountSearch */

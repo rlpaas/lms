@@ -39,7 +39,7 @@ class AccountSearch extends Account
      */
     public function search($params,$id)
     {
-        $query = Account::find();
+        $query = Account::find()->joinWith('accountTransaction');
 
         // add conditions that should always apply here
 

@@ -2,6 +2,9 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use kartik\grid\GridView;
+
+use app\models\AccountTransaction;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Account */
@@ -36,9 +39,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="small-box bg-aqua">
                 <?php endif; ?>
                         <div class="inner">
-                          <h3>150</h3>
+                          <h3><?= AccountTransaction::getSumExternalAccount($model->id); ?></h3>
 
-                          <p><?= $model->accountType->account_name ?></p>
+                          <p><?= $model->accountType->account_name." "."(Balance)" ?></p>
                         </div>
                         <div class="icon">
                           <i class="fa fa-money"></i>
@@ -55,111 +58,29 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-md-9">
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-              <li class="active"><a href="#activity" data-toggle="tab">Transactions</a></li>
+              <li class="active"><a href="#activity" data-toggle="tab">Transactions History</a></li>
             </ul>
             <div class="tab-content">
               <div class="active tab-pane" id="activity">
-                    <table id="example2" class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                  <th>Rendering engine</th>
-                  <th>Browser</th>
-                  <th>Platform(s)</th>
-                  <th>Engine version</th>
-                  <th>CSS grade</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                  <td>Trident</td>
-                  <td>Internet
-                    Explorer 4.0
-                  </td>
-                  <td>Win 95+</td>
-                  <td> 4</td>
-                  <td>X</td>
-                </tr>
-                <tr>
-                  <td>Trident</td>
-                  <td>Internet
-                    Explorer 5.0
-                  </td>
-                  <td>Win 95+</td>
-                  <td>5</td>
-                  <td>C</td>
-                </tr>
-                <tr>
-                  <td>Trident</td>
-                  <td>Internet
-                    Explorer 5.5
-                  </td>
-                  <td>Win 95+</td>
-                  <td>5.5</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Trident</td>
-                  <td>Internet
-                    Explorer 6
-                  </td>
-                  <td>Win 98+</td>
-                  <td>6</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Trident</td>
-                  <td>Internet Explorer 7</td>
-                  <td>Win XP SP2+</td>
-                  <td>7</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Trident</td>
-                  <td>AOL browser (AOL desktop)</td>
-                  <td>Win XP</td>
-                  <td>6</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Firefox 1.0</td>
-                  <td>Win 98+ / OSX.2+</td>
-                  <td>1.7</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Firefox 1.5</td>
-                  <td>Win 98+ / OSX.2+</td>
-                  <td>1.8</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Firefox 2.0</td>
-                  <td>Win 98+ / OSX.2+</td>
-                  <td>1.8</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Firefox 3.0</td>
-                  <td>Win 2k+ / OSX.3+</td>
-                  <td>1.9</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Camino 1.0</td>
-                  <td>OSX.2+</td>
-                  <td>1.8</td>
-                  <td>A</td>
-                </tr>
+                    <?= GridView::widget([
+                        'dataProvider' => $dataTransaction,
+                        //'filterModel' => $searchTransaction,
+                        'summary' => '',
+                        'columns' => [
+                            ['class' => 'yii\grid\SerialColumn'],
 
+                            //'id',
+                            //'ledger_no',
+                            //'account_no',
+                            //'xact_type_code_de',
+                            'date_created',
+                            'xact_type_code_ext',
+                            'amount',
+                            
 
-         
-                </tfoot>
-              </table>
+                            ['class' => 'yii\grid\ActionColumn'],
+                        ],
+                    ]); ?>
               </div>
               <!-- /.tab-pane -->
               

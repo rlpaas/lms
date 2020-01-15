@@ -15,6 +15,7 @@ use app\models\search\ProfileSearch;
 use app\models\Profile;
 use app\models\EntityType;
 use app\models\AccountType;
+use app\models\search\AccountTransactionSearch;
 
 /**
  * AccountController implements the CRUD actions for Account model.
@@ -78,8 +79,13 @@ class AccountController extends Controller
      */
     public function actionView($id)
     {
+        $searchTransaction = new AccountTransactionSearch();
+        $dataTransaction = $searchTransaction->searchAccountMember(Yii::$app->request->queryParams,$id);
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'searchTransaction' => $searchTransaction,
+            'dataTransaction' => $dataTransaction
         ]);
     }
 

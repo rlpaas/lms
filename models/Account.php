@@ -106,4 +106,9 @@ class Account extends \yii\db\ActiveRecord
     {
         return $this->hasOne(EntityType::className(), ['id' => 'entity_type_id']);
     }
+
+    public function getAccountTransaction()
+    {
+        return $this->hasMany(AccountTransaction::className(), ['account_no' => 'id']);
+    }
 }
