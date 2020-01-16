@@ -45,9 +45,9 @@ $(function(){
     });
 
 
-    $('.activity-view-link').click(function() {
+    $('#activity-view-link').click(function() {
     $.get(
-        'view-ajax',
+        'view',
         {
             id: $(this).closest('tr').data('key')
         },

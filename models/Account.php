@@ -110,5 +110,7 @@ class Account extends \yii\db\ActiveRecord
     public function getAccountTransaction()
     {
         return $this->hasMany(AccountTransaction::className(), ['account_no' => 'id']);
+
     }
+
 }

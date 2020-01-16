@@ -47,6 +47,7 @@ class AccountTransactionSearch extends AccountTransaction
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [ 'pageSize' => 10 ],
         ]);
 
         $this->load($params);
@@ -85,6 +86,7 @@ class AccountTransactionSearch extends AccountTransaction
                     'date_created' => SORT_DESC,
                 ],
               ],
+            'pagination' => [ 'pageSize' => 7 ],
         ]);
 
     

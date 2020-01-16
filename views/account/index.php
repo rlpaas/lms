@@ -33,6 +33,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'summary'=> '',
+        'rowOptions'=>function($model){
+            if($model->account_type_id == 1){
+                return ['class' => 'info'];
+            }
+        },
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -62,14 +67,41 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             
             ],
+            [
+                'attribute'=> 'Balance',
+                'format'=> 'raw',
+                'value' => function ($data) {
+                    return AccountTransaction::getSumExternalAccount($data->id);
+
+                },
+
+            ],
 
             ['class' => 'yii\grid\ActionColumn',
                 'template' => '{view}',
+                'buttons' => [
+                  'view' => function ($url, $model, $key) {
+
+                        return Html::a('<span class="glyphicon glyphicon-eye-open"></span>','#',
+                                [
+                                    'title' => 'Update',
+                                    'id' => 'account-view'. $model->id,
+                                    'data-toggle' => 'modal',
+                                    'data-target' => '#account-modals',
+                                    'data-id' => $key,
+                                    'data-pjax' => '0',
+                                    'onclick' => "ajaxmodal('#account-modal', '" . Url::to(['account/view','id'=>$model->id]) . "')"
+                                ]
+                        );
+
+             
+
+                    },
+                ],
             ],
         ],
     ]); ?>
 <?php Pjax::end() ?>
-
 
 </div>
 <?php
@@ -79,5 +111,13 @@ Modal::begin([
    'clientOptions' => ['backdrop' => 'static', 'keyboard' => FALSE],
   ]);
  echo "<div id='contentAccount'></div>";
-Modal::end()
+Modal::end();
+
+Modal::begin([
+    'id' => 'account-modal',
+    'size'=>'modal-lg',
+    'footer' => '<a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>',
+
+]);
+Modal::end();
 ?>

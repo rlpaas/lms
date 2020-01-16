@@ -82,7 +82,7 @@ class AccountController extends Controller
         $searchTransaction = new AccountTransactionSearch();
         $dataTransaction = $searchTransaction->searchAccountMember(Yii::$app->request->queryParams,$id);
 
-        return $this->render('view', [
+        return $this->renderAjax('view', [
             'model' => $this->findModel($id),
             'searchTransaction' => $searchTransaction,
             'dataTransaction' => $dataTransaction
