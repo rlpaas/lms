@@ -61,6 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'dataProvider' => $dataTransaction,
                         //'filterModel' => $searchTransaction,
                         'summary' => '',
+                        'responsiveWrap' => false,
                         'columns' => [
                             ['class' => 'yii\grid\SerialColumn'],
 
@@ -69,7 +70,15 @@ $this->params['breadcrumbs'][] = $this->title;
                             //'account_no',
                             //'xact_type_code_de',
                             'date_created',
-                            'xact_type_code_ext',
+                            [
+                                'attribute'=> 'xact_type_code_ext',
+                                'format'=> 'raw',
+                                'value' => function ($data) {
+                                    return AccountTransaction::getTransactionAccountList($data->xact_type_code_ext);
+
+                                },
+
+                            ],
                             'amount',
                             
 

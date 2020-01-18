@@ -86,4 +86,11 @@ class AccountTransaction extends \yii\db\ActiveRecord
 
     }
 
+    public static function getTransactionAccountList($code)
+    {
+        $ext = TransactionTypeExt::find()->where(['xact_type_code_ext'=> $code])->one();
+        return $ext->description;
+        
+    }
+
 }

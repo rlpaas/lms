@@ -3,18 +3,18 @@
 use yii\helpers\Html;
 use kartik\grid\GridView;
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\search\TransactionTypeDeSearch */
+/* @var $searchModel app\models\search\TransactionTypeExtSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Transaction Type Des';
+$this->title = 'Transaction Type Exts';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="transaction-type-de-index">
+<div class="transaction-type-ext-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Transaction Type De', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Transaction Type Ext', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -27,8 +27,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'xact_type_code',
-            'name',
+            'xact_type_code_ext',
+            'description',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

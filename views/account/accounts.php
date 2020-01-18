@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 
 use yii\helpers\ArrayHelper;
 use app\models\Campus;
@@ -25,6 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
      <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'responsiveWrap' => false,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 

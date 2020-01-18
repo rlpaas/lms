@@ -33,6 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'summary'=> '',
+        'responsiveWrap' => false,
         'rowOptions'=>function($model){
             if($model->account_type_id == 1){
                 return ['class' => 'info'];
