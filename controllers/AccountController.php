@@ -119,7 +119,6 @@ class AccountController extends Controller
                 return 1;
             }else{
 
-                Yii::$app->session->setFlash('error', 'record not saved!');
                 return 0;
             }
         }else{

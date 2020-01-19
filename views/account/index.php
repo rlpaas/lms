@@ -23,7 +23,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($profile->empno.' '.$profile->last_name.' '.$profile->first_name) ?></h1>
 
    <p>
-    <?= Html::button('Create', ['value'=>Url::to(['account/create', 'id'=>$id]),'class' => 'btn btn-success', 'id'=>'accountId']) ?>
+    <?= Html::button('<i class="fa fa-fw fa-user"></i> Account', ['value'=>Url::to(['account/create', 'id'=>$id]),'class' => 'btn btn-success', 'id'=>'accountId']) ?>
+    <?= Html::button('<i class="fa fa-fw  fa-folder-open"></i> Transaction', ['value'=>Url::to(['account-transaction/create','id'=>$id]),'class' => 'btn btn-primary','id'=> 'transId']) ?>
 
     </p>
 
@@ -120,5 +121,13 @@ Modal::begin([
     'footer' => '<a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>',
 
 ]);
+Modal::end();
+
+Modal::begin([
+    'id'=>'transPop',
+    'size'=>'modal-xs',
+   'clientOptions' => ['backdrop' => 'static', 'keyboard' => FALSE],
+  ]);
+ echo "<div id='contentTrans'></div>";
 Modal::end();
 ?>

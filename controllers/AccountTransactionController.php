@@ -66,12 +66,33 @@ class AccountTransactionController extends Controller
     {
         $model = new AccountTransaction();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+       
+        if ($model->load(Yii::$app->request->post())) {
+
+            if($model->xact_type_code_ext == 'Dp' OR $model->xact_type_code_ext == 'Dv' OR $model->xact_type_code_ext == 'Pt')
+            {
+                $model->xact_type_code_de = 'Dr';
+
+            }else{
+                $model->xact_type_code_de = 'Cr';
+            }
+            
+            $model->ledger_no = 9;
+            
+            if($model->save())
+            {   
+                Yii::$app->session->setFlash('success', 'Transaction saved!');
+                return 1;
+                
+            }else{
+
+                return 2;
+            }
         }
 
-        return $this->render('create', [
+        return $this->renderAjax('create', [
             'model' => $model,
+            'id' => $id
         ]);
     }
 

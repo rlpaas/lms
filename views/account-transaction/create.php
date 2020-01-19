@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\AccountTransaction */
 
-$this->title = 'Create Account Transaction';
+$this->title = 'Account Transaction';
 $this->params['breadcrumbs'][] = ['label' => 'Account Transactions', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -15,6 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
+        'id' => $id
     ]) ?>
 
 </div>

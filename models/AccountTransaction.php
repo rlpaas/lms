@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\db\Expression;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "account_transaction".
@@ -33,7 +35,7 @@ class AccountTransaction extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['ledger_no', 'xact_type_code_de', 'xact_type_code_ext', 'account_no', 'amount', 'date_created'], 'required'],
+            [['xact_type_code_ext', 'account_no', 'amount'], 'required'],
             [['ledger_no', 'account_no'], 'integer'],
             [['amount'], 'number'],
             [['date_created'], 'safe'],
@@ -52,9 +54,21 @@ class AccountTransaction extends \yii\db\ActiveRecord
             'ledger_no' => 'Ledger No',
             'xact_type_code_de' => 'Debit/Credit',
             'xact_type_code_ext' => 'Transaction',
-            'account_no' => 'Account No',
+            'account_no' => 'Account Type',
             'amount' => 'Amount',
             'date_created' => 'Date-Time',
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'date_created',
+                'updatedAtAttribute' => false,
+                'value' => new Expression('NOW()'),
+            ],
         ];
     }
 
@@ -67,8 +81,6 @@ class AccountTransaction extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Account::className(), ['id' => 'account_no']);
     }
-    
-
 
     public static function getSumExternalAccount($id)
     {

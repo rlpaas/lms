@@ -44,6 +44,13 @@ $(function(){
         .load($(this).attr('value'));
     });
 
+     //trans create modal
+    $('#transId').click(function(){
+        $('#transPop').modal('show')
+        .find('#contentTrans')
+        .load($(this).attr('value'));
+    });
+
 
     $('#activity-view-link').click(function() {
     $.get(
