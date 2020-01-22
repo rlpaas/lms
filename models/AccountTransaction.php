@@ -105,4 +105,39 @@ class AccountTransaction extends \yii\db\ActiveRecord
         
     }
 
+    public function getTransactionAccountProcess()
+    {
+        if($this->xact_type_code_ext == 'Dp' OR $this->xact_type_code_ext == 'Dv' OR $this->xact_type_code_ext == 'Pt')
+        {
+            $this->xact_type_code_de = 'Dr';
+
+        }else{
+            $this->xact_type_code_de = 'Cr';
+        }
+        
+        $this->ledger_no = 9;
+
+            
+    }
+
+    public function getCheckNegative($id,$amount)
+    {
+
+        //for external account CREDIT when you want to increase the amount and DEBIT when you want to decrease
+        $totalCredit = Yii::$app->db->createCommand("SELECT sum(amount) FROM account_transaction WHERE account_no = $id AND xact_type_code_ext IN ( 'Dp','Dv','Pt' ) ");
+        $sumCredit = $totalCredit->queryScalar();
+
+        //not in, meaning not on the list, like widrawal
+        $totalDebit = Yii::$app->db->createCommand("SELECT sum(amount) FROM account_transaction WHERE account_no = $id AND xact_type_code_ext NOT IN ( 'Dp','Dv','Pt' ) ");
+        $sumDebit = $totalDebit->queryScalar();
+
+        $currentBalance = $sumCredit - $sumDebit;
+
+        $total = $currentBalance - $amount;
+
+        return number_format($total, 2);
+
+    }
+
+
 }

@@ -57,7 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </ul>
             <div class="tab-content">
               <div class="active tab-pane" id="activity">
-                <?php \yii\widgets\Pjax::begin(['enablePushState' => false]);?>
+                <?php \yii\widgets\Pjax::begin(['enablePushState' => false,'timeout' => 2000]);?>
                     <?= GridView::widget([
                         'dataProvider' => $dataTransaction,
                         //'filterModel' => $searchTransaction,

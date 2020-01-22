@@ -21,8 +21,7 @@ use yii\helpers\Url;
 
         <!-- /.search form -->
         <!-- sidebar menu: : style can be found in sidebar.less -->
-        <?=
-        Menu::widget(
+        <?= Menu::widget(
                 [
                     'options' => ['class' => 'sidebar-menu'],
                     'items' => [
@@ -149,6 +148,39 @@ use yii\helpers\Url;
                                     ],
 
                             ]
+                        ],
+                        [
+                            'label' => 'My Profile',
+                            'icon' => 'fa fa-users',
+                            'visible'=> Yii::$app->user->can('members-permission'),
+                            'url' => ['/profile/view','id'=>Yii::$app->user->id],
+                            'active' => Yii::$app->controller->id == 'profile'
+                               
+                        ],
+                        [
+                            'label' => 'My Account',
+                            'icon' => 'fa fa-bank',
+                            'visible'=> Yii::$app->user->can('members-permission'),
+                            'url' => ['/account/accounts'],
+                            'active' => Yii::$app->controller->id == 'account'
+                               
+                        ],
+
+                         [
+                            'label' => 'My Settings',
+                            'icon' => 'fa fa-gears',
+                            'visible'=> Yii::$app->user->can('members-permission'),
+                            'url' => '#',
+                            'items' => [
+                                  
+                                    [
+                                        'label' => 'User Info',
+                                        'icon' => 'fa fa-users',
+                                        'url' => ['/user/settings/account'],
+                                        'active' => Yii::$app->controller->id == 'admin'
+                               
+                                    ],
+                                ]
                         ],
                         
 

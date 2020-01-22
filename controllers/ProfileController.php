@@ -54,9 +54,15 @@ class ProfileController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        if(Yii::$app->user->id == $id OR Yii::$app->user->can('admin-permission'))
+        {
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+            ]);
+            
+        }else{
+            throw new \yii\web\HttpException(401,'You are not authorized to see this page!');
+        }
     }
 
     /**

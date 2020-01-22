@@ -36,7 +36,7 @@ use yii\helpers\Url;
                  
                   <li class="user-footer">
                     <div class="pull-left">
-                      <?= Html::a('Profile', ['/user/settings/account'], ['class'=>'btn btn-default btn-flat']) ?>
+                      <?= Html::a('Profile', ['/profile/view','id'=>Yii::$app->user->id], ['class'=>'btn btn-default btn-flat']) ?>
                     </div>
                     <div class="pull-right">
                         <?=

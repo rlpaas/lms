@@ -65,6 +65,5 @@ $("#transBtn").click(function(e){
     return false;
 });
 
-
 JS;
 $this->registerJs($script);

@@ -69,25 +69,36 @@ class AccountTransactionController extends Controller
        
         if ($model->load(Yii::$app->request->post())) {
 
-            if($model->xact_type_code_ext == 'Dp' OR $model->xact_type_code_ext == 'Dv' OR $model->xact_type_code_ext == 'Pt')
+            $model->getTransactionAccountProcess();
+            
+            if($model->xact_type_code_ext == 'Wd')
             {
-                $model->xact_type_code_de = 'Dr';
 
+                $total = $model->getCheckNegative($model->account_no,$model->amount);
+                if($total > 0)
+                {
+                    $model->save();
+                    Yii::$app->session->setFlash('success', 'Transaction saved!');
+                    return 1;
+
+                }else{
+
+                    Yii::$app->session->setFlash('error', 'Please check your amount you want to widraw');
+                    return 2;
+                }
             }else{
-                $model->xact_type_code_de = 'Cr';
+
+                if($model->save())
+                {
+                    Yii::$app->session->setFlash('success', 'Transaction saved!');
+                    return 1;
+
+                }else{
+
+                    return 2;
+                }
             }
             
-            $model->ledger_no = 9;
-            
-            if($model->save())
-            {   
-                Yii::$app->session->setFlash('success', 'Transaction saved!');
-                return 1;
-                
-            }else{
-
-                return 2;
-            }
         }
 
         return $this->renderAjax('create', [
