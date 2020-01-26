@@ -112,4 +112,39 @@ class AccountTransactionSearch extends AccountTransaction
 
         return $dataProvider;
     }
+
+    public function searchSubLedger($params,$account_ids)
+    {
+        $query = AccountTransaction::find();
+
+        // add conditions that should always apply here
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [ 'pageSize' => 10 ],
+        ]);
+
+        $this->load($params);
+
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
+            return $dataProvider;
+        }
+
+        // grid filtering conditions
+        $query->andFilterWhere([
+            'id' => $this->id,
+            'ledger_no' => $this->ledger_no,
+            'account_no' => $account_ids,
+            'amount' => $this->amount,
+            'date_created' => $this->date_created,
+        ]);
+
+        $query->andFilterWhere(['like', 'xact_type_code_de', $this->xact_type_code_de])
+            ->andFilterWhere(['like', 'xact_type_code_ext', $this->xact_type_code_ext]);
+
+        return $dataProvider;
+    }
+
 }

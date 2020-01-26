@@ -17,7 +17,7 @@ class AccountTypeSearch extends AccountType
     public function rules()
     {
         return [
-            [['id', 'xact_type_code_de', 'is_active'], 'integer'],
+            [['id', 'chart_of_account_code', 'is_active'], 'integer'],
             [['account_name'], 'safe'],
         ];
     }
@@ -59,7 +59,7 @@ class AccountTypeSearch extends AccountType
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'xact_type_code_de' => $this->xact_type_code_de,
+            'chart_of_account_code' => $this->chart_of_account_code,
             'is_active' => $this->is_active,
         ]);
 

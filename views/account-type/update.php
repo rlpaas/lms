@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use app\models\TransactionTypeDe;
+use app\models\ChartOfAccount;
 use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <?= $form->field($model, 'account_name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'xact_type_code_de')->dropDownList(ArrayHelper::map(TransactionTypeDe::find()->all(), 'id', 'name'),[
+    <?= $form->field($model, 'chart_of_account_code')->dropDownList(ArrayHelper::map(ChartOfAccount::find()->all(), 'id', 'name'),[
         'prompt'=>'Select Type', 'class'=>'form-control']) ?>
 
     <?= $form->field($model, 'is_active')->dropDownList($model->getIsActiveList()) ?>

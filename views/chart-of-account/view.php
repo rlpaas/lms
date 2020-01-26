@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\AccountType */
+/* @var $model app\models\ChartOfAccount */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Account Types', 'url' => ['index']];
+$this->title = $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Chart Of Accounts', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="account-type-view">
+<div class="chart-of-account-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -30,9 +30,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'account_name',
-            'chart_of_account_code',
-            'is_active',
+            'name',
+            'classification',
         ],
     ]) ?>
 

@@ -34,10 +34,10 @@ class AccountType extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['account_name', 'xact_type_code_de', 'is_active'], 'required'],
-            [['xact_type_code_de', 'is_active'], 'integer'],
+            [['account_name', 'chart_of_account_code', 'is_active'], 'required'],
+            [['chart_of_account_code', 'is_active'], 'integer'],
             [['account_name'], 'string', 'max' => 150],
-            [['xact_type_code_de'], 'exist', 'skipOnError' => true, 'targetClass' => TransactionTypeDe::className(), 'targetAttribute' => ['xact_type_code_de' => 'id']],
+            [['chart_of_account_code'], 'exist', 'skipOnError' => true, 'targetClass' => ChartOfAccount::className(), 'targetAttribute' => ['chart_of_account_code' => 'id']],
         ];
     }
 
@@ -49,7 +49,7 @@ class AccountType extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'account_name' => 'Account Name',
-            'xact_type_code_de' => 'Transaction Type',
+            'chart_of_account_code' => 'Chart Of Account Code',
             'is_active' => 'Is Active',
         ];
     }
@@ -89,8 +89,8 @@ class AccountType extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getXactTypeCodeDe()
+    public function getChartOfAccountCode()
     {
-        return $this->hasOne(TransactionTypeDe::className(), ['id' => 'xact_type_code_de']);
+        return $this->hasOne(ChartOfAccount::className(), ['id' => 'chart_of_account_code']);
     }
 }

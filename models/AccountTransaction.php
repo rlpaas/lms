@@ -77,7 +77,7 @@ class AccountTransaction extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getAccountNo()
+    public function getAccount()
     {
         return $this->hasOne(Account::className(), ['id' => 'account_no']);
     }
@@ -137,6 +137,75 @@ class AccountTransaction extends \yii\db\ActiveRecord
 
         return number_format($total, 2);
 
+    }
+
+    public function getTotalSl($ids,$view)
+    {
+        $sum = 0;
+
+        if($view == 'totalSl')
+        {
+
+            foreach ($ids as $id) {
+                $totalSl = Yii::$app->db->createCommand("SELECT sum(amount) FROM account_transaction WHERE account_no = $id");
+                $sumSl = $totalSl->queryScalar();
+
+                $sum+= $sumSl;
+            }
+
+            return number_format($sum, 2); 
+
+        }elseif($view == 'credit')
+        {
+            foreach ($ids as $id) {
+                $totalCredit = Yii::$app->db->createCommand("SELECT sum(amount) FROM account_transaction WHERE account_no = $id AND xact_type_code_ext IN ( 'Dp','Dv','Pt' ) ");
+                $sumCredit = $totalCredit->queryScalar();
+
+                 $sum+= $sumCredit;
+            }
+
+            return number_format($sum, 2); 
+
+
+        }
+        elseif($view == 'debit')
+        {
+            foreach ($ids as $id) {
+                $totalDebit = Yii::$app->db->createCommand("SELECT sum(amount) FROM account_transaction WHERE account_no = $id AND xact_type_code_ext NOT IN ( 'Dp','Dv','Pt' ) ");
+                $sumDebit = $totalDebit->queryScalar();
+
+                 $sum+= $sumDebit;
+            }
+
+            return number_format($sum, 2); 
+
+
+        }elseif($view == 'balance')
+        {
+
+            foreach ($ids as $id) {
+                $totalCredit = Yii::$app->db->createCommand("SELECT sum(amount) FROM account_transaction WHERE account_no = $id AND xact_type_code_ext IN ( 'Dp','Dv','Pt' ) ");
+                $sumCredit = $totalCredit->queryScalar();
+
+                //not in, meaning not on the list, like widrawal
+                $totalDebit = Yii::$app->db->createCommand("SELECT sum(amount) FROM account_transaction WHERE account_no = $id AND xact_type_code_ext NOT IN ( 'Dp','Dv','Pt' ) ");
+                $sumDebit = $totalDebit->queryScalar();
+
+                $currentBalance = $sumCredit - $sumDebit;
+
+            
+                $sum+= $currentBalance;
+            }
+
+            return number_format($sum, 2); 
+        }
+
+        else{
+            return $sum;
+        }
+
+        
+        
     }
 
 

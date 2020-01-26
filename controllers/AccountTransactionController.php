@@ -9,6 +9,9 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
+use app\models\AccountType;
+use app\models\Account;
+
 /**
  * AccountTransactionController implements the CRUD actions for AccountTransaction model.
  */
@@ -57,6 +60,31 @@ class AccountTransactionController extends Controller
         ]);
     }
 
+    public function actionSubLedger($id)
+    {
+        $accountType = AccountType::find()->where(['chart_of_account_code'=>$id])->one();
+
+        $accounts =  Account::find()->where(['account_type_id'=> $accountType->id])->all();
+
+        $account_ids = array();
+
+        foreach ($accounts as $account) {
+
+            $account_ids[] = $account->id;
+        }
+
+
+        $searchModel = new AccountTransactionSearch();
+        $dataProvider = $searchModel->searchSubLedger(Yii::$app->request->queryParams,$account_ids);
+
+        return $this->render('sub-ledger', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'account_ids' => $account_ids,
+            'accountType' => $accountType
+        ]);
+    }
+
     /**
      * Creates a new AccountTransaction model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -75,7 +103,7 @@ class AccountTransactionController extends Controller
             {
 
                 $total = $model->getCheckNegative($model->account_no,$model->amount);
-                if($total > 0)
+                if($total >= 0)
                 {
                     $model->save();
                     Yii::$app->session->setFlash('success', 'Transaction saved!');

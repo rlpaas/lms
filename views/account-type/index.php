@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use kartik\grid\GridView;
-use app\models\TransactionTypeDe;
+use app\models\ChartOfAccount;
 use yii\helpers\ArrayHelper;
 use yii\widgets\Pjax;
 use yii\bootstrap\Modal;
@@ -37,10 +37,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'account_name',
             //'xact_type_code_de',
             [
-                'attribute'=> 'xact_type_code_de',
-                'filter' =>ArrayHelper::map(TransactionTypeDe::find()->asArray()->all(), 'id', 'name'),
+                'attribute'=> 'chart_of_account_code',
+                'filter' =>ArrayHelper::map(ChartOfAccount::find()->asArray()->all(), 'id', 'name'),
                 'value' => function ($data) {
-                    return $data->xactTypeCodeDe->name;
+                    return $data->chartOfAccountCode->name;
                 },
             ],
             [

@@ -50,6 +50,29 @@ use yii\helpers\Url;
                         ],
 
                         [
+                            'label' => 'Accounting',
+                            'icon' => 'fa fa-calculator',
+                            'visible'=> Yii::$app->user->can('admin-permission'),
+                            'url' => '#',
+                            'items' => [
+                                   [
+                                        'label' => 'General Ledger',
+                                        'icon' => 'fa fa-file-pdf-o',
+                                        'url' => ['/chart-of-account/general-ledger'],
+                                        'active' => Yii::$app->controller->id == 'chart-of-account'
+                               
+                                    ],
+                                    [
+                                        'label' => 'Chart of Account',
+                                        'icon' => 'fa fa-bar-chart',
+                                        'url' => ['/chart-of-account/index'],
+                                        'active' => Yii::$app->controller->id == 'chart-of-account'
+                               
+                                    ],
+                                ],
+                        ],
+
+                        [
                             'label' => 'System Settings',
                             'icon' => 'fa fa-gears',
                             'visible'=> Yii::$app->user->can('admin-permission'),
@@ -136,7 +159,7 @@ use yii\helpers\Url;
                                                 'active' => Yii::$app->controller->id == 'entity-type'
                                             ],
                                             [
-                                                'label' => 'Account Type (EXT)',
+                                                'label' => 'Account Type',
                                                 'icon' => 'fa fa-money',
                                                 'url' => ['/account-type/index'],
                                                 'active' => Yii::$app->controller->id == 'account-type'

@@ -4,12 +4,12 @@ namespace app\models\search;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\TransactionTypeDe;
+use app\models\TransactionTypeDE;
 
 /**
- * TransactionTypeDeSearch represents the model behind the search form of `app\models\TransactionTypeDe`.
+ * TransactionTypeDeSearch represents the model behind the search form of `app\models\TransactionTypeDE`.
  */
-class TransactionTypeDeSearch extends TransactionTypeDe
+class TransactionTypeDeSearch extends TransactionTypeDE
 {
     /**
      * {@inheritdoc}
@@ -40,7 +40,7 @@ class TransactionTypeDeSearch extends TransactionTypeDe
      */
     public function search($params)
     {
-        $query = TransactionTypeDe::find();
+        $query = TransactionTypeDE::find();
 
         // add conditions that should always apply here
 
